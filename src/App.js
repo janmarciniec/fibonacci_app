@@ -1,22 +1,47 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
+
+  function fibonacci(k) {
+    if (k < 1) {
+      return "Incorrect number of the element";
+    }
+
+    if (k == 1 || k == 2) {
+      return 1;
+    }
+  
+    return fibonacci(k - 1) + fibonacci(k - 2);
+  }
+  
+  const handleSubmit=(e)=> {
+    e.preventDefault();
+    var k = e.target.k.value;
+    var element = fibonacci(k);
+    var result;
+
+    if(k < 1) {
+      result = element;
+    } else {
+      result = k + "th element: " + element;
+    }
+
+    e.target.result.value=result;
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        
+        <p>Fibonacci Sequence</p>
+        
+        <form onSubmit={handleSubmit}>
+          <input type="number" name="k" placeholder="Nubmer of the element"/>
+          <button>Show element</button>
+          <br/>
+          <input type="text" id="result" name="result" disabled/>
+        </form>
+
       </header>
     </div>
   );
